@@ -28,7 +28,43 @@ router.get('/',(req,res) => {
     res.status(200).json('Hello workoutpnp')
 })
 
-router.post('/datas',(req,res) => {
+//to create workout datas
+router.post('/workout_data',(req,res) => {
+    const { name } = req.body
+    const Workouts = new Workout({ name })
+    Workouts.save(function(err,result) {
+        if(err)
+        {
+            console.log(err)
+        }
+        else {
+            res.status(200).json(result);
+        }
+    })
+})
+
+
+
+//to feed exercise datas 
+router.post('/exercise_datas',(req,res) => {
+    const { exerciseInfoRef,name } = req.body
+    const Exercises = new Exercise({ exerciseInfoRef , name });
+    Exercises.save(function(err,result) {
+        if(err)
+        {
+            console.log(err)
+        }
+        else {
+            res.status(200).json(result)
+        }
+    })
+})
+
+
+
+
+//to create session datas
+router.post('/session_datas',(req,res) => {
     const { date, userRef , trainerRef , isCompleted } = req.body 
 
     const Sessions = new Session({ date , userRef , trainerRef , isCompleted });
@@ -44,5 +80,23 @@ router.post('/datas',(req,res) => {
     }) 
 })
 
+
+//exercise_set_datas 
+
+router.post('/exercise_set_datas',(req,res) => {
+    const { number,suggestedWeight,suggestedReps,performedWeight,performedReps  } = req.body
+
+    const ExerciseSets = new ExerciseSet({ number , suggestedWeight, suggestedReps, performedWeight, performedReps});
+    ExerciseSets.save(function(err,result) {
+        if(err)
+        {
+            console.log(err)
+        }
+        else 
+        {
+            res.status(200).json(result)
+        }
+    })
+})
 
 module.exports = router
