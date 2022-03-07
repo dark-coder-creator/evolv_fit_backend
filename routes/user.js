@@ -27,4 +27,10 @@ router.post('/details',(req,res) => {
         }
     })
 })
+
+router.post('/sessions',(req,res) => {
+    
+})
+
+
 module.exports = router

@@ -30,8 +30,8 @@ router.get('/',(req,res) => {
 
 //to create workout datas
 router.post('/workout_data',(req,res) => {
-    const { name } = req.body
-    const Workouts = new Workout({ name })
+    const { name , exercises } = req.body
+    const Workouts = new Workout({ name , exercises })
     Workouts.save(function(err,result) {
         if(err)
         {
@@ -43,12 +43,31 @@ router.post('/workout_data',(req,res) => {
     })
 })
 
+router.get('/get_workout_datas',(req,res) => {
+    Workout.find({},function(err,result) {
+        if(err)
+        {
+            console.log(err)
+        }
+        else 
+        {
+            res.status(200).send(result)
+        }
+    })
+})
 
+
+
+
+
+
+
+//***Exercise***
 
 //to feed exercise datas 
 router.post('/exercise_datas',(req,res) => {
-    const { exerciseInfoRef,name } = req.body
-    const Exercises = new Exercise({ exerciseInfoRef , name });
+    const { exerciseInfoRef,name,exerciseSets } = req.body
+    const Exercises = new Exercise({ exerciseInfoRef , name , exerciseSets });
     Exercises.save(function(err,result) {
         if(err)
         {
@@ -60,14 +79,33 @@ router.post('/exercise_datas',(req,res) => {
     })
 })
 
+router.get('/get_exercise_datas',(req,res) => {
+    Exercise.find({},function(err,result) {
+        if(err)
+        {
+            console.log(err)
+        }
+        else 
+        {
+            res.status(200).json(result)
+        }
+    })
+})
+
+
+
+//********
+
+
+
 
 
 
 //to create session datas
 router.post('/session_datas',(req,res) => {
-    const { date, userRef , trainerRef , isCompleted } = req.body 
+    const { workout,date, userRef , trainerRef , isCompleted } = req.body 
 
-    const Sessions = new Session({ date , userRef , trainerRef , isCompleted });
+    const Sessions = new Session({ workout,date , userRef , trainerRef , isCompleted });
     Sessions.save((err,result) => {
         if(err)
         {
