@@ -11,7 +11,7 @@ router.get('/',(req,res) => {
     res.status(200).json('Hello admin')
 })
 
-router.post('/data',(req,res) => {
+router.post('/exerciseInfo',(req,res) => {
     const { name } = req.body;
     const ExerciseInfo = new Admin({ name:name })
 

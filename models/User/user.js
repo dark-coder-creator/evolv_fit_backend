@@ -33,10 +33,14 @@ const userSchema = new Schema(
       type: mongoose.Types.ObjectId,
       ref: "Trainer",
     },
-    sessions: {
-      type: [mongoose.Types.ObjectId],
-      ref: "Session",
-    },
+     sessions: {
+       type: [mongoose.Types.ObjectId],
+       ref: "Session",
+     },
+    // sessions: {
+    //   type: mongoose.Types.ObjectId,
+    //   ref: "Session",
+    // },
   },
   {
     timestamps: true,
