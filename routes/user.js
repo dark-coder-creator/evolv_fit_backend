@@ -28,8 +28,26 @@ router.post('/details',(req,res) => {
     })
 })
 
-router.post('/sessions',(req,res) => {
-    
+router.get('/trainer',(req,res) => {
+    User.aggregate([{
+        $lookup:{
+            
+                from: 'trainers',
+                localField: 'trainerRef',
+                foreignField: '_id',
+                as: 'trainer'
+              
+        }
+    }],(err,docs) => {
+        if(err)
+        {
+            throw err
+        }
+        else 
+        {
+            res.status(200).json(docs)
+        }
+    })
 })
 
 

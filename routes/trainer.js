@@ -29,6 +29,27 @@ router.post('/details',(req,res) => {
     })
 })
 
+router.get('/users',(req,res) => {
+    Trainer.aggregate([{
+        $lookup:{
+            from:'users',
+            localField:'userRefs',
+            foreignField:'_id',
+            as:'users'
+        }
+    }],(err,docs) => {
+        if(err)
+        {
+            throw err
+        }
+        else 
+        {
+            res.status(200).json(docs)
+        }
+    })
+})
+
+
 module.exports = router
 
 
