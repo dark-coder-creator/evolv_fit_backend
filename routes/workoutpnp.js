@@ -28,6 +28,8 @@ router.get('/',(req,res) => {
     res.status(200).json('Hello workoutpnp')
 })
 
+//****Workout */
+
 //to create workout datas
 router.post('/workout_data',(req,res) => {
     const { name , exercises } = req.body
@@ -42,6 +44,24 @@ router.post('/workout_data',(req,res) => {
         }
     })
 })
+
+//to update and add
+router.put('/add_workout_data',(req,res) => {
+    const obj = {"name":"Squat","exerciseInfoRef":"6221f77d9779d825dfc4ad0e","exerciseSets":{"number":4,"suggestedWeight":82,"suggestedReps":12}}
+
+    Workout.findOneAndUpdate({workout_id:req.body.workout_id},{ $push:{ exercises:obj}},function(err,result) {
+        if(err) {
+            console.log(err)
+        }
+        else {
+            console.log("RESULT"+result)
+            res.send('Done')
+        }
+    })
+
+})
+
+
 
 router.get('/get_workout_datas',(req,res) => {
     Workout.find({},function(err,result) {
@@ -98,7 +118,7 @@ router.get('/get_exercise_datas',(req,res) => {
 
 
 
-
+//*********Session */
 
 
 //to create session datas
@@ -118,6 +138,11 @@ router.post('/session_datas',(req,res) => {
     }) 
 })
 
+
+
+
+
+//******* */
 
 //exercise_set_datas 
 

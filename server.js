@@ -7,6 +7,8 @@ var trainerRouter = require('./routes/trainer')
 var userRouter = require('./routes/user')
 var workoutPnpRouter = require('./routes/workoutpnp')
 
+
+var sessionRouter = require('./routes/workoutpnp/session')
 app.get('/',(req,res) => {
     res.status(200).json('Hello Server')
 })
@@ -22,6 +24,8 @@ app.use('/user',userRouter)
 //4.To use WorkoutPnp router 
 app.use('/workoutpnp',workoutPnpRouter)
 
+//The different flow in workoutpnp
+app.use('/workoutpnp/session',sessionRouter)
 app.listen(port,() =>{
     console.log(`SERVER IS LISTENING ON ${port}`)
 })
